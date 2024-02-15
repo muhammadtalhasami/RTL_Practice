@@ -1,34 +1,45 @@
 module dff_ram_8x72 (
     input wire clk,
-    input wire [1:0] add,
-    input wire en_n,
     input wire wr_n,
+    input wire [2:0] address,
     input wire [71:0] wdata,
 
-    output wire [71:0] rdata2
+    output reg [71:0] rdata
 );
 
-    wire [71:0] read0;
-    wire [71:0] read1;
-    
-    dff_ram_4x72 u_dff_ram_4x72_inst0 (
+    wire [71:0] rdata_inst2;
+    wire [71:0] rdata_inst1;
+    wire en_1 , en_2;
+
+
+    assign en_1 = address[2];
+    assign en_2 = !(address[2]);
+
+
+    dff_ram_4x72 instance_0 (
         .clk(clk),
-        .add(add),
-        .en_n(en_n),
-        .wr_n(wr_n),
+        .en_n(en_1),
+        .wr_n(wr_n), 
+        .add({address[1:0]}),
         .wdata(wdata),
-        .rdata(read0)
+        .rdata(rdata_inst1)
     );
 
-    dff_ram_4x72 u_dff_ram_4x72_inst1 (
+    dff_ram_4x72 instance_1 (
         .clk(clk),
-        .add(add),
-        .en_n(en_n),
-        .wr_n(wr_n),
+        .en_n(en_2),
+        .wr_n(wr_n), 
+        .add({address[1:0]}),
         .wdata(wdata),
-        .rdata(read1)
+        .rdata(rdata_inst2)
     );
 
-    assign rdata2 = read1;
+    always @* begin
+        if (address[2] == 0) begin
+            rdata = rdata_inst1;
+        end else begin
+            rdata = rdata_inst2;
+        end
+    end
 
 endmodule
