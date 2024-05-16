@@ -9,11 +9,12 @@ module counter_tb();
     initial begin
         clk_tb = 0 ;
         rst_tb = 0 ;
-        #5;
+        #1;
         rst_tb = 1 ;
-        #5;
+        #1;
         rst_tb = 0 ;
-        #5;   
+        #1;  
+        $finish; 
     end
 
     counter u_counter0
@@ -29,7 +30,7 @@ module counter_tb();
     end
 
     always begin
-        #5 clk_tb= ~clk_tb;
+        #0.5 clk_tb= ~clk_tb;
     end
 
 endmodule

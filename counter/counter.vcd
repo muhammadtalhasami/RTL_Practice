@@ -1,0 +1,45 @@
+$date
+	Fri Mar 15 22:22:37 2024
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module counter_tb $end
+$var wire 4 ! out_tb [3:0] $end
+$var reg 1 " clk_tb $end
+$var reg 1 # rst_tb $end
+$scope module u_counter0 $end
+$var wire 1 " clk $end
+$var wire 1 # rst $end
+$var reg 4 $ out [3:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+bx $
+0#
+0"
+bx !
+$end
+#500
+1"
+#1000
+0"
+1#
+#1500
+b0 !
+b0 $
+1"
+#2000
+0"
+0#
+#2500
+b1 !
+b1 $
+1"
+#3000
+0"
